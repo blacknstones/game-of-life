@@ -1,0 +1,25 @@
+import React from 'react';
+import Sketch from "react-p5";
+
+const App: React.FC = () => {
+
+
+  let setup = (p5, canvasParentRef) => {
+    let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
+    let x = (p5.windowWidth - p5.width) / 2;
+    let y = (p5.windowHeight - p5.Height) / 2;
+    canvas.position(x, y);
+  }
+
+  let draw = (p5) => {
+    p5.background("rgb(0, 0, 0)");
+    p5.stroke(255);
+  }
+  return (
+    <div className="App">
+      <Sketch setup={setup} draw={draw}/>
+    </div>
+  );
+}
+
+export default App;

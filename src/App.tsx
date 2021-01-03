@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sketch from "react-p5";
 
+const rowsLength = 100;
+const colsLength = 100;
+
 const App: React.FC = () => {
+  const [grid, setGrid] = useState(() => {
+    const rows = [];
+    for (let i = 0; i < rowsLength; i++) {
+      rows.push(Array.from(Array(colsLength), () => 0))
+    }
+  });
 
 
   let setup = (p5, canvasParentRef) => {

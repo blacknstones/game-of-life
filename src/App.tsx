@@ -5,13 +5,14 @@ const rowsLength = 100;
 const colsLength = 100;
 
 const App: React.FC = () => {
-  const [grid, setGrid] = useState(() => {
-    const rows = [];
-    for (let i = 0; i < rowsLength; i++) {
-      rows.push(Array.from(Array(colsLength), () => 0))
+  const [grid, setGrid] = useState();
+  const board = [];
+  for (let i = 0; i < rowsLength; i++) {
+    board[i] = [];
+    for (let j = 0; j < colsLength; j++) {
+      board[i][j] = false;
     }
-  });
-
+  }
 
   let setup = (p5, canvasParentRef) => {
     let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
@@ -24,9 +25,11 @@ const App: React.FC = () => {
     p5.background("rgb(0, 0, 0)");
     p5.stroke(255);
   }
+
+
   return (
     <div className="App">
-      <Sketch setup={setup} draw={draw}/>
+      <Sketch setup={setup} draw={draw} />
     </div>
   );
 }

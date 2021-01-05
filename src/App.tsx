@@ -12,6 +12,7 @@ const App: React.FC = () => {
     for (let j = 0; j < colsLength; j++) {
       board[i][j] = false;
     }
+    
   }
 
   let setup = (p5, canvasParentRef) => {

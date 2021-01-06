@@ -10,9 +10,9 @@ const App: React.FC = () => {
   for (let i = 0; i < rowsLength; i++) {
     board[i] = [];
     for (let j = 0; j < colsLength; j++) {
-      board[i][j] = false;
+      board[i][j] = 0;
     }
-    
+
   }
 
   let setup = (p5, canvasParentRef) => {

@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import "./style.css";
 // import Sketch from "react-p5";
 
-const rowsLength = 8;
-const colsLength = 10;
+const rowsLength = 40;
+const colsLength = 20;
 
 const Cell = styled.div`
-  width: calc(100vw / 10);
-  height: calc(100vw / 10);
-  background: ${(props) => (props.alive ? "white" : "black")};
-  border: 1px solid white;
+  width: calc(90vw / 40);
+  height: calc(90vw / 40);
+  background: ${(props) => (props.isAlive ? "white" : "black")};
+  border: 1px solid grey;
 `;
 
 const makeEmptyGrid = (): number[][] => {
-  const emptyGrid = [];
+  let emptyGrid = [];
   for (let x = 0; x < rowsLength; x++) {
     emptyGrid[x] = [];
     for (let y = 0; y < colsLength; y++) {
@@ -23,21 +24,12 @@ const makeEmptyGrid = (): number[][] => {
   return emptyGrid;
 };
 
-// const createCells = () => {
-//   let cells = [];
-//   for (let i = 0; i < rowsLength; i++) {
-//     for (let j = 0; j < colsLength; j++) {
-
-//     }
-//   }
-
-// }
-
 const App: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [grid, setGrid] = useState(() => {
     return makeEmptyGrid();
   });
+
+  useEffect(() => {}, [grid]);
 
   // let setup = (p5, canvasParentRef) => {
   //   let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
@@ -55,15 +47,52 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {grid.map((rows, x) => {
+      <div className="rows-wrapper">
+        {grid.map((rows, x) => {
+          return (
+            <div className="cols-wrapper">
+              {rows.map((cols, y) => (
+                <Cell
+                  key={`${x}, ${y}`}
+                  onClick={() => {
+                    let newGrid = grid;
+                    newGrid[x][y] = grid[x][y] ? 0 : 1;
+                    setGrid(newGrid);
+                    console.log("clicked");
+                  }}
+                  isAlive={grid[x][y] ? true : false}
+                />
+              ))}
+            </div>
+          );
+        })}
+
+      </div>
+
+      {/* {grid.map((rows, x) => {
         return (
-          <div style={{display: "flex", flexDirection: "row"}}>
+          <div
+            key={`${x}`}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {rows.map((cols, y) => (
-              <Cell key={`${x}${y}`} alive={grid[x][y] ? true : false} />
+              <Cell
+                key={`${y}`}
+                onClick={() => {
+                  let newGrid = grid;
+                  newGrid[x][y] = grid[x][y] ? 0 : 1;
+                  setGrid(newGrid);
+                  console.log("clicked");
+                }}
+                alive={grid[x][y] ? true : false}
+              />
             ))}
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

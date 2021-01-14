@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "./style.css";
 import produce from "immer";
+import preset from "./preset.json";
 // import Sketch from "react-p5";
 
 const rowsLength = 40;
@@ -11,7 +12,7 @@ const Cell = styled.div`
   width: calc(90vw / 40);
   height: calc(90vw / 40);
   background: ${(props) => (props.isAlive ? "white" : "black")};
-  border: 1px solid grey;
+  border: 1px solid transparent;
 `;
 
 const makeEmptyGrid = (): number[][] => {
@@ -26,23 +27,25 @@ const makeEmptyGrid = (): number[][] => {
 };
 
 const App: React.FC = () => {
-  const [grid, setGrid] = useState(() => {
-    return makeEmptyGrid();
-  });
+  const [grid, setGrid] = useState(
+    preset
+    //   () => {
+    //   return makeEmptyGrid();
+    // }
+  );
 
   // use immer to nutate cell and update grid state
   const handleCellClick = (x: number, y: number) => {
-    let newGrid = produce(grid, draftGrid => {
+    let newGrid = produce(grid, (draftGrid) => {
       draftGrid[x][y] = grid[x][y] ? 0 : 1;
     });
     setGrid(newGrid);
     console.log("clicked");
-  };
 
-  // useEffect(() => {
-  //   setGrid(grid);
-    
-  // }, [grid]);
+    // convert 2d array to json object
+
+    console.table(JSON.stringify(grid));
+  };
 
   // let setup = (p5, canvasParentRef) => {
   //   let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
@@ -60,48 +63,26 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <div className="rows-wrapper">
-        {grid.map((rows, x) => {
-          return (
-            <div className="cols-wrapper">
-              {rows.map((cols, y) => (
-                <Cell
-                  key={`${x}, ${y}`}
-                  onClick={() => {
-                    handleCellClick(x, y);
-                  }}
-                  isAlive={grid[x][y] ? true : false}
-                />
-              ))}
-            </div>
-          );
-        })}
+      <div className="game">
+        <div className="rows-wrapper">
+          {grid.map((rows, x) => {
+            return (
+              <div className="cols-wrapper">
+                {rows.map((cols, y) => (
+                  <Cell
+                  className="cell"
+                    key={`${x}, ${y}`}
+                    onClick={() => {
+                      handleCellClick(x, y);
+                    }}
+                    isAlive={grid[x][y] ? true : false}
+                  />
+                ))}
+              </div>
+            );
+          })}
+        </div>
       </div>
-
-      {/* {grid.map((rows, x) => {
-        return (
-          <div
-            key={`${x}`}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {rows.map((cols, y) => (
-              <Cell
-                key={`${y}`}
-                onClick={() => {
-                  let newGrid = grid;
-                  newGrid[x][y] = grid[x][y] ? 0 : 1;
-                  setGrid(newGrid);
-                  console.log("clicked");
-                }}
-                alive={grid[x][y] ? true : false}
-              />
-            ))}
-          </div>
-        );
-      })} */}
     </div>
   );
 };

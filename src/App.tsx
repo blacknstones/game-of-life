@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./style.css";
+import produce from "immer";
 // import Sketch from "react-p5";
 
 const rowsLength = 40;
@@ -29,7 +30,19 @@ const App: React.FC = () => {
     return makeEmptyGrid();
   });
 
-  useEffect(() => {}, [grid]);
+  // use immer to nutate cell and update grid state
+  const handleCellClick = (x: number, y: number) => {
+    let newGrid = produce(grid, draftGrid => {
+      draftGrid[x][y] = grid[x][y] ? 0 : 1;
+    });
+    setGrid(newGrid);
+    console.log("clicked");
+  };
+
+  // useEffect(() => {
+  //   setGrid(grid);
+    
+  // }, [grid]);
 
   // let setup = (p5, canvasParentRef) => {
   //   let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
@@ -55,10 +68,7 @@ const App: React.FC = () => {
                 <Cell
                   key={`${x}, ${y}`}
                   onClick={() => {
-                    let newGrid = grid;
-                    newGrid[x][y] = grid[x][y] ? 0 : 1;
-                    setGrid(newGrid);
-                    console.log("clicked");
+                    handleCellClick(x, y);
                   }}
                   isAlive={grid[x][y] ? true : false}
                 />
@@ -66,7 +76,6 @@ const App: React.FC = () => {
             </div>
           );
         })}
-
       </div>
 
       {/* {grid.map((rows, x) => {

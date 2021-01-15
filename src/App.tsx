@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import "./style.css";
 import produce from "immer";
 import preset from "./preset.json";
 // import Sketch from "react-p5";
@@ -34,6 +33,8 @@ const App: React.FC = () => {
     // }
   );
 
+  const [isRunning, setIsRunning] = useState(false);
+
   // use immer to nutate cell and update grid state
   const handleCellClick = (x: number, y: number) => {
     let newGrid = produce(grid, (draftGrid) => {
@@ -41,35 +42,19 @@ const App: React.FC = () => {
     });
     setGrid(newGrid);
     console.log("clicked");
-
-    // convert 2d array to json object
-
     console.table(JSON.stringify(grid));
   };
-
-  // let setup = (p5, canvasParentRef) => {
-  //   let canvas = p5.createCanvas(1000, 800).parent(canvasParentRef);
-  //   let x = (p5.windowWidth - p5.width) / 2;
-  //   let y = (p5.windowHeight - p5.Height) / 2;
-  //   canvas.position(x, y);
-  // }
-
-  // let draw = (p5) => {
-  //   p5.background("rgb(0, 0, 0)");
-  //   p5.stroke(255);
-  // }
-
-  // <Sketch setup={setup} draw={draw} />
 
   return (
     <div className="App">
       <div className="game">
-        <div className="rows-wrapper">
+
+        <div className="grid-wrapper">
           {grid.map((rows, x) => {
             return (
               <div className="cols-wrapper">
                 {rows.map((cols, y) => (
-                  <Cell
+                   <Cell
                   className="cell"
                     key={`${x}, ${y}`}
                     onClick={() => {
@@ -82,6 +67,18 @@ const App: React.FC = () => {
             );
           })}
         </div>
+
+        <div className="menu">
+            <p className="intro">Game of Life</p>
+            <div className="buttons">
+                <button>Run</button>
+                <button>Reset</button>
+                <button>Random</button>
+            </div>
+            
+
+        </div>
+
       </div>
     </div>
   );

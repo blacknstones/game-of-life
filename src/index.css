@@ -1,0 +1,93 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* 
+font-family: 'Press Start 2P', cursive;
+font-family: 'VT323', monospace; 
+*/
+
+.game {
+    display: flex;
+    justify-content: center;
+}
+
+.cell:hover {
+    border: 1px solid grey;
+    cursor: pointer;
+}
+.grid-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.cols-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    position: absolute;
+    left: 5vw;
+    bottom: 5vh;
+}
+
+.intro {
+    color: grey;
+    font-family: 'VT323', monospace; 
+    font-size: 30px;
+    padding-left: 6px;
+
+}
+
+.buttons button {
+    color: lightgray;
+    font-family: 'VT323', monospace; 
+    font-size: 30px;
+}
+
+.buttons button:hover,
+.intro:hover {
+    color: white;
+    cursor: pointer;
+    
+}
+
+
+
+/* reset */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+}
+
+button {
+    border: none;
+    background: none;
+  }

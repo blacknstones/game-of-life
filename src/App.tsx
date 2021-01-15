@@ -48,14 +48,13 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="game">
-
         <div className="grid-wrapper">
           {grid.map((rows, x) => {
             return (
               <div className="cols-wrapper">
                 {rows.map((cols, y) => (
-                   <Cell
-                  className="cell"
+                  <Cell
+                    className="cell"
                     key={`${x}, ${y}`}
                     onClick={() => {
                       handleCellClick(x, y);
@@ -69,16 +68,21 @@ const App: React.FC = () => {
         </div>
 
         <div className="menu">
+
+          <button className="menu-button">
+            <i className="far fa-circle"></i>
+          </button>
+
+          <div className="toggle">
             <p className="intro">Game of Life</p>
-            <div className="buttons">
-                <button>Run</button>
-                <button>Reset</button>
-                <button>Random</button>
+            <div className="actions">
+              <button>Run</button>
+              <button>Reset</button>
+              <button>Random</button>
             </div>
-            
+          </div>
 
         </div>
-
       </div>
     </div>
   );

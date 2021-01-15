@@ -29,6 +29,12 @@ font-family: 'VT323', monospace;
     position: absolute;
     left: 5vw;
     bottom: 5vh;
+    display: flex;
+}
+
+.menu-button {
+    color: lightgrey;
+    font-size: 40px;
 }
 
 .intro {
@@ -39,13 +45,14 @@ font-family: 'VT323', monospace;
 
 }
 
-.buttons button {
+.actions button {
     color: lightgray;
     font-family: 'VT323', monospace; 
     font-size: 30px;
 }
 
-.buttons button:hover,
+.menu-button:hover,
+.actions button:hover,
 .intro:hover {
     color: white;
     cursor: pointer;

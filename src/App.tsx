@@ -40,6 +40,8 @@ const App: React.FC = () => {
   runningRef.current = isRunning;
 
   const [interval, setInterval] = useState(200);
+  const intervalRef = useRef(interval);
+  intervalRef.current = interval;
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -84,6 +86,8 @@ const App: React.FC = () => {
   const runIteration = useCallback(() => {
     console.log("isRunning: ", isRunning);
     console.log("runningRef", runningRef);
+    console.log("interval", interval);
+    console.log("intervalRef:", intervalRef);
     // useRef hook to grab the current isRunning state
     if (!runningRef.current) {
       return;
@@ -139,11 +143,12 @@ const App: React.FC = () => {
           >
             <i className="far fa-circle"></i>
           </button>
-
-          {menuIsOpen && (
+    
+               {menuIsOpen && (
             <div className="toggle">
               <p className="intro">Game of Life</p>
               <div className="actions">
+
                 <button
                   onClick={() => {
                     setIsRunning(!isRunning);
@@ -155,6 +160,7 @@ const App: React.FC = () => {
                 >
                   {isRunning ? "Stop" : "Run"}
                 </button>
+
                 <button
                   onClick={() => {
                     setIsRunning(false);
@@ -163,17 +169,35 @@ const App: React.FC = () => {
                 >
                   Reset
                 </button>
+
                 <button
                   onClick={() => {
                     setIsRunning(false);
                     setGrid(generateGrid("random"));
                   }}
-                >
-                  Random
+                >Random</button>
+
+                <button onClick={
+                    () => setGrid(generateGrid("empty"))
+                    }>Clear</button>
+
+                <button onClick={() => {
+                    setInterval(interval - 50);
+                    console.log(interval);
+                }}>
+                    -
+                </button>
+
+                <button>Speed</button>
+                <button>
+                    +
                 </button>
               </div>
             </div>
           )}
+
+
+         
         </div>
       </div>
     </div>

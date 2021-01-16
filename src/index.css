@@ -5,7 +5,10 @@
 font-family: 'Press Start 2P', cursive;
 font-family: 'VT323', monospace; 
 */
-
+.App {
+    height: 100vh;
+    width: 100vw;
+}
 .game {
     display: flex;
     justify-content: center;
@@ -18,6 +21,7 @@ font-family: 'VT323', monospace;
 .grid-wrapper {
     display: flex;
     flex-direction: row;
+    max-width: 1024px;
 }
 
 .cols-wrapper {

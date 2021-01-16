@@ -3,6 +3,9 @@ import styled from "styled-components";
 import produce from "immer";
 import preset from "./preset.json";
 
+type ruleOptions =
+    "life" | "brain";
+
 const rowsLength = 40;
 const colsLength = 20;
 
@@ -42,6 +45,8 @@ const App: React.FC = () => {
   const [interval, setInterval] = useState(200);
   const intervalRef = useRef(interval);
   intervalRef.current = interval;
+
+  const [rule, setRule] = useState<ruleOptions>("life");
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 

@@ -3,8 +3,7 @@ import styled from "styled-components";
 import produce from "immer";
 import preset from "./preset.json";
 
-type ruleOptions =
-    "life" | "brain";
+// type ruleOptions = "life" | "brain";
 
 const rowsLength = 40;
 const colsLength = 20;
@@ -42,11 +41,11 @@ const App: React.FC = () => {
   const runningRef = useRef(isRunning);
   runningRef.current = isRunning;
 
-  const [interval, setInterval] = useState(200);
+  const [interval, setInterval] = useState(50);
   const intervalRef = useRef(interval);
   intervalRef.current = interval;
 
-  const [rule, setRule] = useState<ruleOptions>("life");
+  //const [rule, setRule] = useState<ruleOptions>("life");
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -63,7 +62,7 @@ const App: React.FC = () => {
     });
     setGrid(newGrid);
     console.log("clicked");
-    // console.table(JSON.stringify(grid));
+     console.table(JSON.stringify(grid));
   };
 
   const countNeighbors = (grid: number[][], x: number, y: number): number => {
@@ -91,7 +90,6 @@ const App: React.FC = () => {
   const runIteration = useCallback(() => {
     console.log("isRunning: ", isRunning);
     console.log("runningRef", runningRef);
-    console.log("interval", interval);
     console.log("intervalRef:", intervalRef);
     // useRef hook to grab the current isRunning state
     if (!runningRef.current) {
@@ -113,9 +111,9 @@ const App: React.FC = () => {
         }
       })
     );
-
-    setTimeout(runIteration, interval);
-  }, [interval, isRunning]);
+    const speed = intervalRef.current; 
+    setTimeout(runIteration, speed);
+  }, [isRunning]);
 
   return (
     <div className="App">
@@ -187,14 +185,19 @@ const App: React.FC = () => {
                     }>Clear</button>
 
                 <button onClick={() => {
-                    setInterval(interval - 50);
+                    setInterval(interval + 50);
                     console.log(interval);
                 }}>
                     -
                 </button>
 
                 <button>Speed</button>
-                <button>
+                <button onClick={() => {
+                    interval >= 100 ? 
+                    setInterval(interval - 50) : 
+                    (interval >= 20 ? setInterval(interval - 10) : setInterval(10));
+                    console.log(interval);
+                }}>
                     +
                 </button>
               </div>

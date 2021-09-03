@@ -1,6 +1,6 @@
 # Game Of Life
 
-An interactive simulator of the classic cellular automaton [Game of Life] (https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). 
+An interactive simulator of the classic cellular automaton [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). 
 
 Built with TypeScript and React.
 ####  

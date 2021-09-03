@@ -1,6 +1,7 @@
 # Game Of Life
 
 An interactive simulator of the classic cellular automaton Game of Life. Built with TypeScript and React.
+####  
 ![](./src/assets/demo.gif)
 
 ## Demo
